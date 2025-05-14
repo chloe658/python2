@@ -39,80 +39,110 @@ class Main:
         self.collection_var = StringVar()
         self.collection_var.set("Pick-Up")
         self.index = 0
-        self.index = 0
-        WD = 15
+        wd = 15
+        wd2 = 25
 
         # Frames
         self.create_order_frame = Frame(parent)
         self.create_order_frame.grid()
-        self.menu_frame = Frame(self.create_order_frame, relief="solid", borderwidth=0)
+        self.menu_frame = Frame(self.create_order_frame,
+                                relief="solid", borderwidth=3)
         self.menu_frame.grid(row=0, columnspan=2)
         self.display_order = Frame(parent)
 
         for i in range(len(self.menu)):
 
-            Label(self.menu_frame, text=self.menu[i][0]).grid(row=self.rowcount1, column=0)
-            Label(self.menu_frame, text="$" + str(self.menu[i][1])).grid(row=self.rowcount1, column=1)
+            Label(self.menu_frame, text=self.menu[i][0], width=10,
+                  bg="light blue").grid(row=self.rowcount1, column=0)
+            Label(self.menu_frame, text="$" + str(self.menu[i][1]), width=10,
+                  bg="light blue").grid(row=self.rowcount1, column=1)
             self.rowcount1 += 1
 
         # CREATE ORDER WIDGETS
-        self.create_order_label = Label(self.display_order, text="Create Order")
-        self.create_order_label.grid(row=0, columnspan=2)
-
-        self.option_label = Label(self.create_order_frame, text="Item: ")
+        self.option_label = Label(self.create_order_frame, text="Item: ",
+                                  width=wd)
         self.option_label.grid(row=self.rowcount1, column=0)
-        self.selected_option = OptionMenu(self.create_order_frame, self.selected_option_var, *self.menu_names)
+        self.selected_option = OptionMenu(self.create_order_frame,
+                                          self.selected_option_var,
+                                          *self.menu_names)
         self.selected_option.grid(row=self.rowcount1, column=1)
 
-        self.amount_label = Label(self.create_order_frame, text="Amount: ")
+        self.amount_label = Label(self.create_order_frame,
+                                  text="Amount: ", width=wd)
         self.amount_label.grid(row=self.rowcount1+1, column=0)
-        self.amount_entry = Entry(self.create_order_frame, textvariable=self.amount_var)
+        self.amount_entry = Entry(self.create_order_frame,
+                                  textvariable=self.amount_var, width=wd)
         self.amount_entry.grid(row=self.rowcount1+1, column=1)
 
-        self.add_item_btn = Button(self.create_order_frame, text="Add Item", command=self.add_item)
-        self.add_item_btn.grid(row=self.rowcount1+2, column=1)
+        self.add_item_btn = Button(self.create_order_frame, text="Add Item",
+                                   command=self.add_item, width=wd)
+        self.add_item_btn.grid(row=self.rowcount1+2,
+                               columnspan=2, pady=(5, 20))
 
-        self.name_label = Label(self.create_order_frame, text="Name: ")
+        self.name_label = Label(self.create_order_frame,
+                                text="Name: ", width=wd)
         self.name_label.grid(row=self.rowcount1+3, column=0)
-        self.name_entry = Entry(self.create_order_frame, textvariable=self.name_var)
+        self.name_entry = Entry(self.create_order_frame,
+                                textvariable=self.name_var, width=wd)
         self.name_entry.grid(row=self.rowcount1+3, column=1)
 
         self.pickup = Radiobutton(self.create_order_frame, text="Pick-Up",
-                                  value="Pick-Up", variable=self.collection_var)
+                                  value="Pick-Up",
+                                  variable=self.collection_var, width=wd)
         self.pickup.grid(row=self.rowcount1+4, column=0)
-        self.delivery = Radiobutton(self.create_order_frame, text="Delivery ($15 Fee)", value="Delivery", variable=self.collection_var)
+        self.delivery = Radiobutton(self.create_order_frame,
+                                    text="Delivery ($15 Fee)",
+                                    value="Delivery",
+                                    variable=self.collection_var, width=wd)
         self.delivery.grid(row=self.rowcount1+4, column=1)
 
-        self.enter_button = Button(self.create_order_frame, text="SUBMIT", command=self.submit_order, state="disabled")
-        self.enter_button.grid(row=self.rowcount1+5, column=0, sticky=W)
+        self.enter_button = Button(self.create_order_frame, text="SUBMIT",
+                                   command=self.submit_order,
+                                   state="disabled", width=wd)
+        self.enter_button.grid(row=self.rowcount1+5, column=0,
+                               sticky=W, pady=(20, 5))
 
-        self.view_orders_btn = Button(self.create_order_frame, text="View Orders", command=self.view_orders, state="disabled")
-        self.view_orders_btn.grid(row=self.rowcount1+5, column=1, sticky=E)
+        self.view_orders_btn = Button(self.create_order_frame,
+                                      text="View Orders",
+                                      command=self.view_orders,
+                                      state="disabled", width=wd)
+        self.view_orders_btn.grid(row=self.rowcount1+5, column=1,
+                                  sticky=E, pady=(20, 5))
 
         # CREATE DISPLAY WIDGETS
-        self.display_order_label = Label(self.display_order, text="Display Orders")
+        self.display_order_label = Label(self.display_order,
+                                         text="Display Orders", width=wd)
         self.display_order_label.grid(row=0, column=0)
-        self.add_new_btn = Button(self.display_order, text="Add New Order", command=self.display_to_create)
+        self.add_new_btn = Button(self.display_order, text="Add New Order",
+                                  command=self.display_to_create, width=wd)
         self.add_new_btn.grid(row=0, column=1)
 
-        self.previous_order_btn = Button(self.display_order, text="Previous", command=self.display_previous)
-        self.next_order_btn = Button(self.display_order, text="Next", command=self.display_next)
-        self.previous_order_btn.grid(row=1, column=0)
-        self.next_order_btn.grid(row=1, column=1)
+        self.previous_order_btn = Button(
+            self.display_order, text="Previous",
+            command=self.display_previous, width=10)
+        self.next_order_btn = Button(
+            self.display_order, text="Next",
+            command=self.display_next, width=10)
+        self.previous_order_btn.grid(row=1, column=0, sticky=W, pady=(5, 20))
+        self.next_order_btn.grid(row=1, column=1, sticky=E, pady=(5, 20))
 
-        self.name_display = Label(self.display_order, text="")
+        # Text will be added later
+        self.name_display = Label(self.display_order, text="", width=wd2)
         self.name_display.grid(row=2, columnspan=2)
-        self.total_price_display = Label(self.display_order, text="")
+        self.total_price_display = Label(self.display_order,
+                                         text="", width=wd2)
         self.total_price_display.grid(row=3, columnspan=2)
-        self.collection_display = Label (self.display_order, text="")
+        self.collection_display = Label(self.display_order, text="", width=wd2)
         self.collection_display.grid(row=4, columnspan=2)
-        self.item_display = Label(self.display_order, text="Items: ")
+        self.item_display = Label(self.display_order, text="Items: ", width=wd)
         self.item_display.grid(row=5, column=0)
 
     def submit_order(self):
         """Save order as an instance of the Order class."""
         if self.name_var.get().strip() == "":
             messagebox.showerror("Error", "Please enter a name")
+            self.name_entry.delete(0, END)
+            self.name_entry.focus()
         elif len(self.current_items) == 0:
             messagebox.showerror("Error", "Please select an item")
         else:
@@ -131,12 +161,12 @@ class Main:
                         price += int(item[1])*int(thing[1])
             if collection_method == "Delivery":
                 price += 15
-            self.orders.append(Order(name, item_names, amount, price, collection_method))
-            self.current_items = [] # Reset list
+            self.orders.append(Order(
+                name, item_names, amount, price, collection_method))
+            self.current_items = []  # Reset list
             self.name_entry.delete(0, END)
             self.name_entry.focus()
             self.collection_var.set("Pick-Up")
-
 
     def display_to_create(self):
         """Change to create_order frame."""
@@ -146,25 +176,25 @@ class Main:
         # Reset rowcounts
         self.rowcount1 = 0
         self.rowcount2 = 6
-    
+
     def display_next(self):
         """Display next order."""
         if self.index >= len(self.orders) - 1:
-            self.index = 0 #Loops around
+            self.index = 0  # Loops around
         else:
-            self.index +=1
-        for temp in self.temp_list:
-            temp.destroy()
-        self.temp_list.clear()
-        self.rowcount2 = 5
-        self.configure_display_labels()
-    
+            self.index += 1
+        self.clear_display()
+
     def display_previous(self):
         """Display previous order."""
         if self.index == 0:
-            self.index = len(self.orders) - 1 #Loops around
+            self.index = len(self.orders) - 1  # Loops around
         else:
-            self.index -=1
+            self.index -= 1
+        self.clear_display()
+
+    def clear_display(self):
+        """Destroy item labels."""
         for temp in self.temp_list:
             temp.destroy()
         self.temp_list.clear()
@@ -178,13 +208,17 @@ class Main:
         else:
             try:
                 int(self.amount_var.get())
-                var = [self.selected_option_var.get(), self.amount_var.get()]
-                self.current_items.append(var)
-                self.selected_option_var.set("Select an item")
-                self.enter_button.configure(state="normal")
-                self.amount_entry.delete(0, END)
+                if int(self.amount_var.get()) <= 0:
+                    raise ValueError
+                else:
+                    var = [self.selected_option_var.get(),
+                           self.amount_var.get()]
+                    self.current_items.append(var)
+                    self.selected_option_var.set("Select an item")
+                    self.enter_button.configure(state="normal")
+                    self.amount_entry.delete(0, END)
             except ValueError:
-                messagebox.showerror("Error", "Please enter a number")
+                messagebox.showerror("Error", "Please enter a positive number")
                 self.amount_entry.delete(0, END)
                 self.amount_entry.focus()
 
@@ -194,24 +228,30 @@ class Main:
         self.create_order_frame.grid_forget()
         self.display_order.grid()
         self.configure_display_labels()
-    
+
     def configure_display_labels(self):
         """Update labels using index number. Remove previous item labels."""
-        self.name_display.configure(text="Name: " + str(self.orders[self.index].name))
+        item = self.orders[self.index]
+        self.name_display.configure(
+            text="Name: " + str(item.name))
         # Clear previous labels
         for temp in self.temp_list:
             temp.destroy()
         self.temp_list.clear()
         self.rowcount2 = 6
+        self.total_price_display.configure(
+            text="Total Price: $" + str(item.price))
+        self.collection_display.configure(
+            text=f"Collection by {item.collection_method}")
 
-        self.total_price_display.configure(text="Total Price: " + str(self.orders[self.index].price))
-        self.collection_display.configure(text=f"Collection by {self.orders[self.index].collection_method}")
-        
-        for i in range(len(self.orders[self.index].item_ordered)):
-            label = Label(self.display_order, text=f"x{self.orders[self.index].amount[i-1]} {self.orders[self.index].item_ordered[i-1]}")
+        for i in range(len(item.item_ordered)):
+            label = Label(self.display_order,
+                          text=f"x{item.amount[i]} {item.item_ordered[i]}",
+                          width=15)
             label.grid(row=5 + i, column=1, sticky=W)
             self.temp_list.append(label)
             self.rowcount2 += 1
+
 
 if __name__ == "__main__":
     root = Tk()
