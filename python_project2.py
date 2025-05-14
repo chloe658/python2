@@ -148,7 +148,7 @@ class Main:
         else:
             self.view_orders_btn.configure(state="normal")
             self.enter_button.configure(state="disabled")
-            name = self.name_var.get()
+            name = self.name_var.get().title()
             # Create list of item names for display
             item_names = [item[0] for item in self.current_items]
             amount = [item[1] for item in self.current_items]
@@ -218,7 +218,8 @@ class Main:
                     self.enter_button.configure(state="normal")
                     self.amount_entry.delete(0, END)
             except ValueError:
-                messagebox.showerror("Error", "Please enter a positive number")
+                messagebox.showerror("Error",
+                                     "Please enter a positive, whole number")
                 self.amount_entry.delete(0, END)
                 self.amount_entry.focus()
 
